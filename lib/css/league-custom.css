@@ -20,3 +20,7 @@
 
 .reveal h1 {
   text-shadow: none;}
+
+.reveal pre code {
+  max-height: 550px;
+}

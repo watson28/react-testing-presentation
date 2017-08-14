@@ -73,50 +73,16 @@
 
 				<section>
 					<h2>Getting started with Mocha</h2>
-					<pre>
-						<code class="shell">
+					<pre><code class="shell">
 $ npm install mocha
 $ mkdir test
 $ $EDITOR test/test.js
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<pre>
-						<code class="javascript" data-trim contenteditable style="font-size: 20px;">
-var assert = require('assert');
-
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(4));
-    });
-  });
-});
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<pre>
-						<code class="shell">
-$ ./node_modules/mocha/bin/mocha
-
-  Array
-    #indexOf()
-      ✓ should return -1 when the value is not present
-
-
-  1 passing (9ms)
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 
 				<section>
 					<h2>Radiography of a test file</h2>
-					<pre>
-						<code class="javascript" style="font-size: 16px;">
+					<pre><code class="hljs" style="font-size: 16px;">
 describe('[Name of the class/component to test]', function() {
 
   before(function() {
@@ -140,8 +106,35 @@ describe('[Name of the class/component to test]', function() {
     // first test case
   });
 });
-						</code>
-					</pre>
+					</code></pre>
+				</section>
+
+
+				<section>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 20px;">
+var assert = require('assert');
+
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return -1 when the value is not present', function() {
+      assert.equal(-1, [1,2,3].indexOf(4));
+    });
+  });
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<pre><code class="shell">
+$ ./node_modules/mocha/bin/mocha
+
+  Array
+    #indexOf()
+      ✓ should return -1 when the value is not present
+
+
+  1 passing (9ms)
+					</code></pre>
 				</section>
 
 				<section>
@@ -160,14 +153,11 @@ describe('[Name of the class/component to test]', function() {
 				</section>
 
 				<section>
-					<pre>
-						<code class="shell">
+					<pre><code class="shell">
 $ npm install --save-dev karma karma-mocha karma-chrome-launcher
-						</code>
-					</pre>
+					</code></pre>
 
-					<pre>
-						<code class="javascript">
+					<pre><code class="javascript">
 module.exports = function (config) {
     config.set({
         frameworks: ['mocha'],
@@ -176,20 +166,16 @@ module.exports = function (config) {
         singleRun: true
     });
 };
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 
 				<section>
 					<p>Configure browserify</p>
-					<pre>
-						<code class="shell">
+					<pre><code class="shell">
 $ npm install --save-dev browserify karma-browserify
-						</code>
-					</pre>
+					</code></pre>
 
-					<pre>
-						<code class="javascript">
+					<pre><code class="javascript">
 module.exports = function (config) {
     config.set({
         frameworks: ['mocha', 'browserify'],
@@ -204,22 +190,101 @@ module.exports = function (config) {
         singleRun: true
     });
 };
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 
-				<section data-background-video="lib/video/karma_chrome.ogv" data-background-video-loop data-background-video-muted>
-					<h2>Video</h2>
+				<section data-background-video="lib/video/karma-running-chrome.mp4" data-background-video-loop data-background-video-muted>
 				</section>
 
 				<section>
-					<p>Add CHAI assertion library</p>
-				</section> 
+					<p>Lets remove the emergency browser windows with PhantomJS</p>
+					<pre><code class="shell">
+$ npm install --save-dev karma-phantomjs-launcher
+					</code></pre>
+				</section>
+
+				<section data-background-video="lib/video/karma-running-phantom.mp4" data-background-video-loop data-background-video-muted>
+				</section>
+
+				<section>
+					<img src="lib/img/chai.png" alt="Karma logo" />
+					<p>assertion library for node and the browser that can be delightfully paired with any javascript testing framework.</p>
+					<div class="pure-g">
+						<div class="pure-u-1-2	">
+							<pre><code class="js" style="font-size: 20px;">
+chai.should();
+
+foo.should.be.a('string');
+foo.should.equal('bar');
+foo.should.have.lengthOf(3);
+tea.should.have.property('flavors')
+.with.lengthOf(3);
+							</code></pre>
+						</div>
+						<div class="pure-u-1-2">
+							<pre><code class="js" style="font-size: 20px;">
+var expect = chai.expect;
+
+expect(foo).to.be.a('string');
+expect(foo).to.equal('bar');
+expect(foo).to.have.lengthOf(3);
+expect(tea).to.have.property('flavors')
+	.with.lengthOf(3);
+							</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 20px;">
+//var assert = require('assert');
+var expect = chai.expect;
+
+describe('Array', function() {
+    describe('#indexOf()', function() {
+        it('should return -1 when the value is not present', function() {
+            //assert.equal(-1, [1,2,3].indexOf(4));
+            expect([1,2,3].indexOf(4)).to.equal(-1);
+        });
+    });
+});
+						</code></pre>
+				</section>
+
+				<section>
+					<p>General diagrama of the testing tools used and how they interoperate</p>
+				</section>
 
 				<section>
 					<h1>React Testing</h1>
-					<h2>How to test components?</h2>
 				</section>				
+
+				<section>
+					<blockquote cite="https://www.toptal.com/react/how-react-components-make-ui-testing-easy">
+						Front-end code isn’t about manipulating data. It’s about user events and rendering the right views at the right time. Front-ends are about users.						
+					</blockquote>
+				</section>
+
+				<section>
+					<div class="pure-g">
+						<div class="pure-u-1-2">
+							<h3 style="line-height: 8em;">How do I test components?</h3>
+						</div>
+						<div class="pure-u-1-2">
+							<img src="lib/img/how-to-test-component.gif" alt="coder doesnt know how to test components">
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Most tests will follow the same pattern:</h2>
+					<ol>
+						<li>Mock component dependencies, props and context.</li>
+						<li>Render.</li>
+						<li>Find specific node.</li>
+						<li>Check contents.</li>
+					</ol>
+				</section>
 
 				<section>
 					<h2>React Test Utility</h2>
@@ -250,9 +315,66 @@ module.exports = function (config) {
 							</ul>
 						</div>
 					</div>
-					
 				</section>
 
+				<section>
+					<h2>Example: Water component</h2>
+				</section>
+
+				<section>
+					<h2>Let's test our Water component</h2>
+					<pre><code class="hljs" style="font-size: 16px;">
+describe('Water component', function () {
+    var renderedComponent;
+    var textElement;
+    var mockProps = {initialTempeture: '18'}
+    
+    beforeEach(function () {
+        renderedComponent = ReactTestUtils.renderIntoDocument(<Water {...mockProps} />);
+        textElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedComponent, 'p');
+    });
+    
+    it('should render with initial tempeture', function () {
+        expect(textElement.innerHTML).to.include('LIQUID');
+    });
+    
+    ...
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Water component: change tempeture</h2>
+					<pre><code class="js" style="font-size: 16px;">
+it('should be gas when tempeture is above 100 celcious degree', function () {
+	var input = ReactTestUtils.findRenderedDOMComponentWithTag(renderedComponent, 'input');
+	input.value = '150';
+	ReactTestUtils.Simulate.change(input);
+	
+	expect(textElement.innerHTML).to.include('GAS');
+});
+
+it('should be solid when tempeture is above 0 celcious degree', function () {
+	var input = ReactTestUtils.findRenderedDOMComponentWithTag(renderedComponent, 'input');
+	input.value = '-10';
+	ReactTestUtils.Simulate.change(input);
+	
+	expect(textElement.innerHTML).to.include('SOLID');
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>How to mock component's dependencies?</h2>
+				</section>
+
+				<section>
+					<h2>Assertions against nested components</h2>
+				</section>
+
+				<section>
+					<h2>Shallow rendering</h2>
+				</section>
 			</div>
 		</div>
 
@@ -264,6 +386,9 @@ module.exports = function (config) {
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
